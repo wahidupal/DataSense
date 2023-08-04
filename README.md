@@ -1,1 +1,2 @@
-# Data_analysis_app
+### Data Analysis App
+This script creates a dynamic data visualization and analysis web application using the Streamlit library. The app enables users to upload CSV or Excel files and perform various data analysis operations. Features include viewing the dataset, obtaining descriptive statistics, checking for missing values, and visualizing correlations. Users can also generate different types of plots, including scatterplots, line plots, histograms, box plots, and bar charts. The app is designed to handle errors and guide the user in case of issues such as incorrect file formats or permission errors. It demonstrates a proficient use of Python's data analysis and web libraries to create a user-friendly, interactive data analysis tool.
