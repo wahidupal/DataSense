@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
 # title of the app
-st.title("Data Analyzer")
+st.title("DataSense")
 
 # Add a sidebar
 st.sidebar.subheader("Visualization Settings")
