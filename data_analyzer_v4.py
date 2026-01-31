@@ -12,7 +12,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("📊 Data Analyzer v3 – DuckDB SQL Lab")
+st.title("📊 Data Analyzer v4 – DuckDB SQL Lab")
 
 MAX_VIZ_ROWS = 50_000
 
@@ -237,3 +237,4 @@ with tabs[3]:
                 fig = px.scatter(result_df, x=x_col, y=y_col)
 
             st.plotly_chart(fig, use_container_width=True)
+
