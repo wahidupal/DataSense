@@ -8,7 +8,7 @@ from datetime import datetime
 # App Config
 # -------------------------
 st.set_page_config(
-    page_title="Data Analyzer v3 – DuckDB SQL Lab",
+    page_title="Data Analyzer v4 – DuckDB SQL Lab",
     layout="wide"
 )
 
@@ -237,4 +237,5 @@ with tabs[3]:
                 fig = px.scatter(result_df, x=x_col, y=y_col)
 
             st.plotly_chart(fig, use_container_width=True)
+
 
