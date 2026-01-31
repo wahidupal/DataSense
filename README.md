@@ -1,4 +1,4 @@
-# 📊 Data Analyzer v3 – DuckDB SQL Lab
+# 📊 Data Analyzer v4 – DuckDB SQL Lab
 
 A modern, interactive data analysis web app built with **Streamlit**, **DuckDB**, and **Plotly**.  
 This project is designed for fast data exploration, SQL-based analytics, and flexible visualization, all in one place.
