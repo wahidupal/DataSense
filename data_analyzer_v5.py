@@ -3,16 +3,17 @@ import pandas as pd
 import duckdb
 import plotly.express as px
 from datetime import datetime
+from profiling.dataset_profile import profile_dataset
 
 # -------------------------
 # App Config
 # -------------------------
 st.set_page_config(
-    page_title="Data Analyzer v4 – DuckDB SQL Lab",
+    page_title="Data Analyzer v5 – DuckDB SQL Lab",
     layout="wide"
 )
 
-st.title("📊 Data Analyzer v4 – DuckDB SQL Lab")
+st.title("📊 Data Analyzer v5 – DuckDB SQL Lab")
 
 MAX_VIZ_ROWS = 50_000
 
@@ -95,20 +96,35 @@ with tabs[0]:
     if st.session_state.df is None:
         st.info("Upload a dataset to begin.")
     else:
-        df = st.session_state.df
+        profile = profile_dataset(df)
 
-        st.subheader("Dataset Preview")
-        st.dataframe(df.head(100))
+        dataset_info = profile["dataset"]
 
-        col1, col2 = st.columns(2)
+        col1, col2, col3, col4 = st.columns(4)
 
         with col1:
-            st.subheader("Column Types")
-            st.dataframe(df.dtypes.astype(str))
+            st.metric("Rows", f"{dataset_info['rows']:,}")
 
         with col2:
-            st.subheader("Missing Values")
-            st.dataframe(df.isnull().sum())
+            st.metric("Columns", dataset_info["columns"])
+
+        with col3:
+            st.metric("Memory", f"{dataset_info['memory_mb']:.2f} MB")
+
+        with col4:
+            st.metric("Duplicate Rows", f"{dataset_info['duplicate_rows']:,}")
+
+st.subheader("Column Profile")
+
+column_profile_df = pd.DataFrame(profile["columns"])
+
+st.dataframe(
+    column_profile_df,
+    use_container_width=True
+)
+
+st.subheader("Dataset Preview")
+st.dataframe(df.head(100), use_container_width=True)
 
 
 # ======================================================
