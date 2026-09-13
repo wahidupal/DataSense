@@ -95,6 +95,7 @@ tabs = st.tabs([
 with tabs[0]:
     if st.session_state.df is None:
         st.info("Upload a dataset to begin.")
+
     else:
         profile = profile_dataset(df)
 
@@ -112,19 +113,26 @@ with tabs[0]:
             st.metric("Memory", f"{dataset_info['memory_mb']:.2f} MB")
 
         with col4:
-            st.metric("Duplicate Rows", f"{dataset_info['duplicate_rows']:,}")
+            st.metric(
+                "Duplicate Rows",
+                f"{dataset_info['duplicate_rows']:,}"
+            )
 
-st.subheader("Column Profile")
+        st.subheader("Column Profile")
 
-column_profile_df = pd.DataFrame(profile["columns"])
+        column_profile_df = pd.DataFrame(profile["columns"])
 
-st.dataframe(
-    column_profile_df,
-    use_container_width=True
-)
+        st.dataframe(
+            column_profile_df,
+            use_container_width=True
+        )
 
-st.subheader("Dataset Preview")
-st.dataframe(df.head(100), use_container_width=True)
+        st.subheader("Dataset Preview")
+
+        st.dataframe(
+            df.head(100),
+            use_container_width=True
+        )
 
 
 # ======================================================
