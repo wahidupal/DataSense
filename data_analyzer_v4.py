@@ -134,14 +134,22 @@ with tabs[1]:
 
         chart_type = st.selectbox(
             "Chart Type",
-            ["Histogram", "Bar", "Box", "Scatter", "Line"]
+            ["Histogram", "Bar", "Box", "Scatter", "Line"],
+            key= "raw_chart_type"
         )
 
-        x_col = st.selectbox("X axis", filtered_df.columns)
+        x_col = st.selectbox(
+            "X axis", 
+            filtered_df.columns, 
+            key="raw_x_axis"
+            )
         y_col = None
 
         if chart_type in ["Scatter", "Line", "Bar", "Box"]:
-            y_col = st.selectbox("Y axis", filtered_df.columns)
+            y_col = st.selectbox(
+                "Y axis", 
+                filtered_df.columns, key="raw_y_axis"
+                )
 
         if len(filtered_df) > MAX_VIZ_ROWS:
             st.warning(
@@ -220,14 +228,23 @@ with tabs[3]:
 
         chart_type = st.selectbox(
             "Chart Type",
-            ["Bar", "Line", "Scatter", "Histogram"]
+            ["Bar", "Line", "Scatter", "Histogram"],
+            key="query_chart_type"
         )
 
-        x_col = st.selectbox("X axis", result_df.columns)
+        x_col = st.selectbox(
+            "X axis", 
+            result_df.columns,
+            key="query_x_axis"
+            )
         y_col = None
 
         if chart_type != "Histogram":
-            y_col = st.selectbox("Y axis", result_df.columns)
+            y_col = st.selectbox(
+                "Y axis", 
+                result_df.columns,
+                key="query_y_axis"
+            )
 
         if len(result_df) > MAX_VIZ_ROWS:
             st.warning("Result too large to visualize.")
