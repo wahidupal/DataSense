@@ -123,12 +123,21 @@ with tabs[0]:
         column_profile_df = pd.DataFrame(profile["columns"])
 
         st.dataframe(
-            column_profile_df,
-            use_container_width=True
+            column_profile_df
         )
 
-        st.subheader("Dataset Preview")
+        st.subheader("Numeric Profile")
 
+        numeric_profile_df = pd.DataFrame(profile["numeric"])
+
+        if numeric_profile_df.empty:
+            st.info("No numeric columns detected.")
+        else:
+            st.dataframe(
+                numeric_profile_df.round(2)
+            )
+
+        st.subheader("Dataset Preview")
         st.dataframe(
             df.head(100),
             use_container_width=True
