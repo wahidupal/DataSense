@@ -52,7 +52,12 @@ if uploaded_file:
         st.session_state.df = df
 
         con = st.session_state.con
-        con.execute("DROP TABLE IF EXISTS data")
+
+        try:
+            con.unregister("data")
+        except Exception:
+            pass
+
         con.register("data", df)
 
         st.sidebar.success("Dataset loaded successfully")
