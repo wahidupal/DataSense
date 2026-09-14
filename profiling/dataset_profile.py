@@ -1,6 +1,30 @@
 import pandas as pd
 
 
+def detect_semantic_type(series: pd.Series) -> str:
+    """
+    Detect the semantic type of a pandas Series.
+    """
+
+    if pd.api.types.is_bool_dtype(series):
+        return "Boolean"
+
+    if pd.api.types.is_numeric_dtype(series):
+        return "Numeric"
+
+    if pd.api.types.is_datetime64_any_dtype(series):
+        return "Datetime"
+
+    if pd.api.types.is_object_dtype(series):
+        unique_ratio = series.nunique(dropna=True) / max(len(series), 1)
+
+        if unique_ratio <= 0.05:
+            return "Categorical"
+
+        return "Text"
+
+    return "Text"
+
 def profile_dataset(df: pd.DataFrame) -> dict:
     """
     Generate basic dataset-level and column-level profiling statistics.
@@ -28,6 +52,7 @@ def profile_dataset(df: pd.DataFrame) -> dict:
             "null_percentage": (null_count / len(df)) * 100,
             "unique_count": unique_count,
             "unique_percentage": (unique_count / len(df)) * 100,
+            "semantic_type": detect_semantic_type(df[column]),
         }
 
         profile["columns"].append(column_profile)
